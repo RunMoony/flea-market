@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@prisma/client": "^3.9.1",
+    "@swc/core-win32-x64-msvc": "^1.2.136",
     "@tailwindcss/forms": "^0.4.0",
     "next": "^12.0.9",
     "react": "^18.0.0-rc.0",
