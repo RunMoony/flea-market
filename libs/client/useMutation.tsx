@@ -7,11 +7,6 @@ interface UseMutationState {
 }
 type UseMutationResult = [(data: any) => void, UseMutationState];
 export default function useMutation(url: string): UseMutationResult {
-  const [state, setState] = useState({
-    loading: false,
-    data: undefined,
-    error: undefined,
-  });
   const [loading, setLoading] = useState<undefined | any>(false);
   const [data, setData] = useState<undefined | any>(undefined);
   const [error, setError] = useState<undefined | any>(undefined);
