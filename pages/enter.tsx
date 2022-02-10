@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Button from "components/button";
-import Input from "components/input";
-import useMutation from "libs/client/useMutation";
-import { cls } from "libs/client/utils";
+import Button from "@components/button";
+import Input from "@components/input";
+import useMutation from "@libs/client/useMutation";
+import { cls } from "@libs/client/utils";
+import { useRouter } from "next/router";
 
 interface EnterForm {
   email?: string;
@@ -24,7 +25,6 @@ const Enter: NextPage = () => {
     useMutation<MutationResult>("/api/users/enter");
   const [confirmToken, { loading: tokenLoading, data: tokenData }] =
     useMutation<MutationResult>("/api/users/confirm");
-  const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset } = useForm<EnterForm>();
   const { register: tokenRegister, handleSubmit: tokenHandleSubmit } =
     useForm<TokenForm>();
@@ -45,6 +45,12 @@ const Enter: NextPage = () => {
     if (tokenLoading) return;
     confirmToken(validForm);
   };
+  const router = useRouter();
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push("/");
+    }
+  }, [tokenData, router]);
   return (
     <div className='mt-16 px-4'>
       <h3 className='text-3xl font-bold text-center'>Enter to Carrot</h3>
@@ -55,13 +61,15 @@ const Enter: NextPage = () => {
             className='flex flex-col mt-8 space-y-4'
           >
             <Input
-              register={tokenRegister("token", { required: true })}
+              register={tokenRegister("token", {
+                required: true,
+              })}
               name='token'
-              label='Comfirmation Token'
+              label='Confirmation Token'
               type='number'
               required
             />
-            <Button text={tokenLoading ? "Loading..." : "Confirm Token"} />
+            <Button text={tokenLoading ? "Loading" : "Confirm Token"} />
           </form>
         ) : (
           <>
@@ -69,7 +77,7 @@ const Enter: NextPage = () => {
               <h5 className='text-sm text-gray-500 font-medium'>
                 Enter using:
               </h5>
-              <div className='grid  border-b  w-full mt-8 grid-cols-2 '>
+              <div className='grid border-b  w-full mt-8 grid-cols-2 '>
                 <button
                   className={cls(
                     "pb-4 font-medium text-sm border-b-2",
@@ -100,7 +108,9 @@ const Enter: NextPage = () => {
             >
               {method === "email" ? (
                 <Input
-                  register={register("email", { required: true })}
+                  register={register("email", {
+                    required: true,
+                  })}
                   name='email'
                   label='Email address'
                   type='email'
@@ -109,7 +119,7 @@ const Enter: NextPage = () => {
               ) : null}
               {method === "phone" ? (
                 <Input
-                  register={register("phone", { required: true })}
+                  register={register("phone")}
                   name='phone'
                   label='Phone number'
                   type='number'
@@ -117,11 +127,11 @@ const Enter: NextPage = () => {
                   required
                 />
               ) : null}
-              {method === "email" ? <Button text={"Get login link"} /> : null}
+              {method === "email" ? (
+                <Button text={loading ? "Loading" : "Get login link"} />
+              ) : null}
               {method === "phone" ? (
-                <Button
-                  text={loading ? "Loading..." : "Get one-time password"}
-                />
+                <Button text={loading ? "Loading" : "Get one-time password"} />
               ) : null}
             </form>
           </>

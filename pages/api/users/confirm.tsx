@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import client from "@libs/server/client";
-import { withApiSession } from "libs/server/withSession";
+import { withApiSession } from "@libs/server/withSession";
 
 async function handler(
   req: NextApiRequest,
@@ -14,10 +14,10 @@ async function handler(
     },
   });
   if (!foundToken) return res.status(404).end();
-  /*req.session.user = {
+  req.session.user = {
     id: foundToken.userId,
   };
-  await req.session.save();*/
+  await req.session.save();
   await client.token.deleteMany({
     where: {
       userId: foundToken.userId,
@@ -26,5 +26,6 @@ async function handler(
   res.json({ ok: true });
 }
 
-export default withApiSession();
-//withHandler({ methods: ["POST"], handler, isPrivate: false })
+export default withApiSession(
+  withHandler({ methods: ["POST"], handler, isPrivate: false })
+);
