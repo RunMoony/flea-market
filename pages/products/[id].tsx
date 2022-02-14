@@ -27,6 +27,8 @@ const ItemDetail: NextPage = () => {
   );
   const [toggleFav] = useMutation(`/api/products/${router.query.id}/fav`);
   const onFavClick = () => {
+    if (!data) return;
+    mutate({ ...data, isLiked: !data.isLiked }, false);
     toggleFav({});
   };
   return (
@@ -60,7 +62,7 @@ const ItemDetail: NextPage = () => {
               <button
                 onClick={onFavClick}
                 className={cls(
-                  "p-3 rounded-md flex items-center hover:text-gray-100 justify-center",
+                  "p-3 rounded-md flex items-center hover:text-gray-500 justify-center",
                   data?.isLiked
                     ? "text-red-500 hover:text-red-600"
                     : "text-gray-400 hover:text-gray-500"
