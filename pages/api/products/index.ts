@@ -9,13 +9,13 @@ async function handler(
 ) {
   if (req.method === "GET") {
     const products = await client.product.findMany({
-      include: {
+      /*include: {
         _count: {
           select: {
             favs: true,
           },
         },
-      },
+      },*/
     });
     return res.json({
       ok: true,
