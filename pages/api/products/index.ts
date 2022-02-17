@@ -8,23 +8,27 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   if (req.method === "GET") {
-    const products = await client.product.findMany({
-      /*include: {
-        _count: {
-          select: {
-            favs: true,
+    client.$queryRaw`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`.then(
+      async () => {
+        const products = await client.product.findMany({
+          include: {
+            _count: {
+              select: {
+                favs: true,
+              },
+            },
           },
-        },
-      },*/
-    });
-    return res.json({
-      ok: true,
-      products,
-    });
+        });
+        res.json({
+          ok: true,
+          products,
+        });
+      }
+    );
   }
   if (req.method === "POST") {
     const {
-      body: { name, price, description },
+      body: { name, price, description, photoId },
       session: { user },
     } = req;
     const product = await client.product.create({
@@ -32,7 +36,7 @@ async function handler(
         name,
         price: +price,
         description,
-        image: "xx",
+        image: photoId,
         user: {
           connect: {
             id: user?.id,
