@@ -33,14 +33,14 @@ const Write: NextPage = () => {
     }
   }, [data, router]);
   return (
-    <Layout canGoBack title='Write Post'>
+    <Layout canGoBack title='동네생활 글쓰기'>
       <form onSubmit={handleSubmit(onValid)} className='p-4 space-y-4'>
         <TextArea
           register={register("question", { required: true, minLength: 5 })}
           required
-          placeholder='Ask a question!'
+          placeholder='우리 동네 관련된 질문이나 이야기를 해보세요.'
         />
-        <Button text={loading ? "Loading..." : "Submit"} />
+        <Button text={loading ? "로딩중..." : "완료"} />
       </form>
     </Layout>
   );

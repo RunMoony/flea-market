@@ -35,19 +35,19 @@ const Upload: NextPage = () => {
     }
   }, [data, router]);
   return (
-    <Layout canGoBack title='Upload Product'>
+    <Layout canGoBack title='중고거래 글쓰기'>
       <form className='p-4 space-y-4' onSubmit={handleSubmit(onValid)}>
         <Input
           register={register("name", { required: true })}
           required
-          label='Name'
+          label='글 제목'
           name='name'
           type='text'
         />
         <Input
           register={register("price", { required: true })}
           required
-          label='Price'
+          label='가격'
           name='price'
           type='text'
           kind='price'
@@ -55,10 +55,10 @@ const Upload: NextPage = () => {
         <TextArea
           register={register("description", { required: true })}
           name='description'
-          label='Description'
+          label='내용'
           required
         />
-        <Button text={loading ? "Loading" : "Upload item"} />
+        <Button text={loading ? "로딩중..." : "완료"} />
       </form>
     </Layout>
   );

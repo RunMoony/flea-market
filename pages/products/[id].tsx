@@ -48,7 +48,7 @@ const ItemDetail: NextPage = () => {
               </p>
               <Link href={`/users/profiles/${data?.product?.user?.id}`}>
                 <a className='text-xs font-medium text-gray-500'>
-                  View profile &rarr;
+                  프로필 확인하기 &rarr;
                 </a>
               </Link>
             </div>
@@ -62,7 +62,7 @@ const ItemDetail: NextPage = () => {
             </span>
             <p className=' my-6 text-gray-700'>{data?.product?.description}</p>
             <div className='flex items-center justify-between space-x-2'>
-              <Button large text='Talk to seller' />
+              <Button large text='채팅으로 거래하기' />
               <button
                 onClick={onFavClick}
                 className={cls(

@@ -63,7 +63,7 @@ const EditProfile: NextPage = () => {
             htmlFor='picture'
             className='cursor-pointer py-2 px-3 border hover:bg-gray-50 border-gray-300 rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 text-gray-700'
           >
-            Change
+            프로필 변경
             <input
               id='picture'
               type='file'
@@ -75,21 +75,21 @@ const EditProfile: NextPage = () => {
         <Input
           register={register("name")}
           required={false}
-          label='Name'
+          label='이름'
           name='name'
           type='text'
         />
         <Input
           register={register("email")}
           required={false}
-          label='Email address'
+          label='이메일'
           name='email'
           type='email'
         />
         <Input
           register={register("phone")}
           required={false}
-          label='Phone number'
+          label='전화번호'
           name='phone'
           type='number'
           kind='phone'
@@ -99,7 +99,7 @@ const EditProfile: NextPage = () => {
             {errors.formErrors.message}
           </span>
         ) : null}
-        <Button text={loading ? "Loading..." : "Update profile"} />
+        <Button text={loading ? "로딩중..." : "완료"} />
       </form>
     </Layout>
   );
