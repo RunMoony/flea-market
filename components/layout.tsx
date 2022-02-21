@@ -53,7 +53,7 @@ export default function Layout({
               className={cls(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/"
-                  ? "text-orange-500"
+                  ? "text-blue-500"
                   : "hover:text-gray-500 transition-colors"
               )}
             >
@@ -79,7 +79,7 @@ export default function Layout({
               className={cls(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/community"
-                  ? "text-orange-500"
+                  ? "text-blue-500"
                   : "hover:text-gray-500 transition-colors"
               )}
             >
@@ -105,7 +105,7 @@ export default function Layout({
               className={cls(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/chats"
-                  ? "text-orange-500"
+                  ? "text-blue-500"
                   : "hover:text-gray-500 transition-colors"
               )}
             >
@@ -131,7 +131,7 @@ export default function Layout({
               className={cls(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/streams"
-                  ? "text-orange-500"
+                  ? "text-blue-500"
                   : "hover:text-gray-500 transition-colors"
               )}
             >
@@ -157,7 +157,7 @@ export default function Layout({
               className={cls(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/profile"
-                  ? "text-orange-500"
+                  ? "text-blue-500"
                   : "hover:text-gray-500 transition-colors"
               )}
             >
@@ -175,7 +175,7 @@ export default function Layout({
                   d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
                 ></path>
               </svg>
-              <span>나의 캐럿</span>
+              <span>나의 지갑</span>
             </a>
           </Link>
         </nav>
