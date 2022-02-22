@@ -35,7 +35,6 @@ const Stream: NextPage = () => {
   const { user } = useUser();
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<MessageForm>();
-  console.log(register);
   const { data, mutate } = useSWR<StreamResponse>(
     router.query.id ? `/api/streams/${router.query.id}` : null,
     {

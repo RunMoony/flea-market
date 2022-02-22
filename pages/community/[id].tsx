@@ -110,7 +110,7 @@ const CommunityPostDetail: NextPage = () => {
               onClick={onWonderClick}
               className={cls(
                 "flex space-x-2 items-center text-sm",
-                data?.isWondering ? "text-teal-600" : ""
+                data?.isWondering ? "text-blue-600" : ""
               )}
             >
               <svg
@@ -167,7 +167,7 @@ const CommunityPostDetail: NextPage = () => {
         <form className='px-4' onSubmit={handleSubmit(onValid)}>
           <TextArea
             name='description'
-            placeholder='Answer this question!'
+            placeholder='답변해보세요!'
             required
             register={register("answer", { required: true, minLength: 5 })}
           />
