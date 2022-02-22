@@ -1,16 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
-import client from "libs/server/client";
+import client from "@libs/server/client";
 import { withApiSession } from "@libs/server/withSession";
-import { json } from "stream/consumers";
-
-declare module "iron-session" {
-  interface IronSessionData {
-    user?: {
-      id: number;
-    };
-  }
-}
 
 async function handler(
   req: NextApiRequest,
@@ -28,7 +19,7 @@ async function handler(
   if (req.method === "POST") {
     const {
       session: { user },
-      body: { email, phone, name },
+      body: { email, phone, name, avatarId },
     } = req;
     const currentUser = await client.user.findUnique({
       where: {
@@ -49,7 +40,7 @@ async function handler(
       if (alreadyExists) {
         return res.json({
           ok: false,
-          error: "Email already taken",
+          error: "Email already taken.",
         });
       }
       await client.user.update({
@@ -99,9 +90,17 @@ async function handler(
         },
       });
     }
-    res.json({
-      ok: true,
-    });
+    if (avatarId) {
+      await client.user.update({
+        where: {
+          id: user?.id,
+        },
+        data: {
+          avatar: avatarId,
+        },
+      });
+    }
+    res.json({ ok: true });
   }
 }
 
