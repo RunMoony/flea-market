@@ -53,7 +53,7 @@ const Enter: NextPage = () => {
   }, [tokenData, router]);
   return (
     <div className='mt-16 px-4'>
-      <h3 className='text-3xl font-bold text-center'>Enter to Carrot</h3>
+      <h3 className='text-3xl font-bold text-center'>우리 동네마켓</h3>
       <div className='mt-12'>
         {data?.ok ? (
           <form
@@ -65,17 +65,17 @@ const Enter: NextPage = () => {
                 required: true,
               })}
               name='token'
-              label='Confirmation Token'
+              label='인증번호'
               type='number'
               required
             />
-            <Button text={tokenLoading ? "Loading" : "Confirm Token"} />
+            <Button text={tokenLoading ? "로딩중..." : "인증하기"} />
           </form>
         ) : (
           <>
             <div className='flex flex-col items-center'>
               <h5 className='text-sm text-gray-500 font-medium'>
-                Enter using:
+                중고 거래부터 동네 정보까지 공유해보세요!
               </h5>
               <div className='grid border-b  w-full mt-8 grid-cols-2 '>
                 <button
@@ -87,7 +87,7 @@ const Enter: NextPage = () => {
                   )}
                   onClick={onEmailClick}
                 >
-                  Email
+                  이메일
                 </button>
                 <button
                   className={cls(
@@ -98,7 +98,7 @@ const Enter: NextPage = () => {
                   )}
                   onClick={onPhoneClick}
                 >
-                  Phone
+                  전화번호
                 </button>
               </div>
             </div>
@@ -112,7 +112,7 @@ const Enter: NextPage = () => {
                     required: true,
                   })}
                   name='email'
-                  label='Email address'
+                  label='이메일'
                   type='email'
                   required
                 />
@@ -121,17 +121,17 @@ const Enter: NextPage = () => {
                 <Input
                   register={register("phone")}
                   name='phone'
-                  label='Phone number'
+                  label='전화번호'
                   type='number'
                   kind='phone'
                   required
                 />
               ) : null}
               {method === "email" ? (
-                <Button text={loading ? "Loading" : "Get login link"} />
+                <Button text={loading ? "로딩중..." : "시작하기"} />
               ) : null}
               {method === "phone" ? (
-                <Button text={loading ? "Loading" : "Get one-time password"} />
+                <Button text={loading ? "로딩중..." : "시작하기"} />
               ) : null}
             </form>
           </>
@@ -142,7 +142,7 @@ const Enter: NextPage = () => {
             <div className='absolute w-full border-t border-gray-300' />
             <div className='relative -top-3 text-center '>
               <span className='bg-white px-2 text-sm text-gray-500'>
-                Or enter with
+                다른 방법으로 로그인
               </span>
             </div>
           </div>
