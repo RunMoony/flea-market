@@ -172,7 +172,7 @@ const CommunityPostDetail: NextPage = () => {
             register={register("answer", { required: true, minLength: 5 })}
           />
           <button className='mt-2 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:outline-none '>
-            {answerLoading ? "Loading..." : "Reply"}
+            {answerLoading ? "로딩중..." : "답변하기"}
           </button>
         </form>
       </div>
