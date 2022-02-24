@@ -18,7 +18,10 @@ export default function Message({
         reversed ? "flex-row-reverse space-x-reverse" : ""
       )}
     >
-      <div className='w-8 h-8 rounded-full bg-slate-400' />
+      <img
+        src={`https://imagedelivery.net/VN-2madUiks20zZD2HQArA/${avatarUrl}/avatar`}
+        className='w-10 h-10 rounded-full bg-slate-500'
+      />
       <div className='w-1/2 text-sm text-gray-700 p-2 border border-gray-300 rounded-md'>
         <p>{message}</p>
       </div>
