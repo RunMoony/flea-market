@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Layout from "components/layout";
-import Message from "components/message";
+import Layout from "@components/layout";
+import Message from "@components/message";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 import { Stream } from "@prisma/client";
@@ -45,7 +45,7 @@ const Stream: NextPage = () => {
     `/api/streams/${router.query.id}/messages`
   );
   const onValid = (form: MessageForm) => {
-    if (loading) return null;
+    if (loading) return;
     reset();
     mutate(
       (prev) =>
@@ -70,11 +70,18 @@ const Stream: NextPage = () => {
     );
     sendMessage(form);
   };
-
   return (
     <Layout canGoBack>
       <div className='py-10 px-4  space-y-4'>
-        <div className='w-full rounded-md shadow-sm bg-slate-300 aspect-video' />
+        {data?.stream.cloudflareId ? (
+          <iframe
+            className='w-full aspect-video  rounded-md shadow-sm'
+            src={`https://iframe.videodelivery.net/${data?.stream.cloudflareId}`}
+            allow='accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;'
+            allowFullScreen={true}
+          ></iframe>
+        ) : null}
+
         <div className='mt-5'>
           <h1 className='text-3xl font-bold text-gray-900'>
             {data?.stream?.name}
@@ -83,15 +90,27 @@ const Stream: NextPage = () => {
             ${data?.stream?.price}
           </span>
           <p className=' my-6 text-gray-700'>{data?.stream?.description}</p>
+          <div className='bg-blue-400 p-5 rounded-md overflow-scroll flex flex-col space-y-3'>
+            <span>Stream Keys (secret)</span>
+            <span className='text-white'>
+              <span className='font-medium text-gray-800'>URL:</span>{" "}
+              {data?.stream.cloudflareUrl}
+            </span>
+            <span className='text-white'>
+              <span className='font-medium text-gray-800'>Key:</span>{" "}
+              {data?.stream.clourflareKey}
+            </span>
+          </div>
         </div>
         <div>
-          <h2 className='text-2xl font-bold text-gray-900'>실시간 채팅</h2>
+          <h2 className='text-2xl font-bold text-gray-900'>Live 채팅</h2>
           <div className='py-10 pb-16 h-[50vh] overflow-y-scroll  px-4 space-y-4'>
-            {data?.stream?.messages.map((message) => (
+            {data?.stream.messages.map((message) => (
               <Message
                 key={message.id}
                 message={message.message}
                 reversed={message.user.id === user?.id}
+                avatarUrl={message.user.avatar}
               />
             ))}
           </div>
