@@ -15,9 +15,7 @@ export default function Forms() {
   } = useForm<LoginForm>({
     mode: "onBlur",
   });
-  const onValid = (data: LoginForm) => {
-    console.log("adsasdasd");
-  };
+  const onValid = (data: LoginForm) => {};
   const onInvalid = (errors: FieldErrors) => {
     console.log(errors);
   };
