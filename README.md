@@ -6,13 +6,13 @@
 
 ## 기술 스택
 
-* [X] React 18, Nextjs, TypeScript
+* [X] React, Nextjs, TypeScript
 
 * [X] Prisma, PlanetScale
 
 * [X] TailwindCSS
 
-* [X] SWR, MDX, Vercel, Cloudflare(Images, Streams)
+* [X] SWR, MDX, Cloudflare(Images, Streams)
 
 
 ## 주요 기능
